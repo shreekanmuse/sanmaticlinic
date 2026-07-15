@@ -1,0 +1,294 @@
+/* 
+ * sanmaticlinic - responsive.css
+ * Responsiveness adjustments across breakpoints
+ * Mobile-first overrides and layout adaptions
+ */
+
+/* ==========================================================================
+   Breakpoints Guidelines
+   - Large Desktop / TV: > 1440px
+   - Desktop / Laptop: 992px - 1440px
+   - Tablet: 768px - 991px
+   - Mobile: < 768px
+   ========================================================================== */
+
+/* 1. Large Screens & TV (> 1440px) */
+@media (min-width: 1600px) {
+  :root {
+    --container-width: 1500px;
+  }
+}
+
+/* 2. Medium Laptops / Desktops (< 1200px) */
+@media (max-width: 1200px) {
+  :root {
+    --container-width: 960px;
+  }
+  
+  html {
+    font-size: 15px; /* Downscale typography slightly */
+  }
+  
+  .footer-grid {
+    gap: 2.5rem;
+    grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+  }
+}
+
+/* 3. Tablets (< 992px) */
+@media (max-width: 991px) {
+  :root {
+    --container-width: 720px;
+  }
+  
+  html {
+    font-size: 14px;
+  }
+  
+  section {
+    padding: 6rem 0;
+  }
+  
+  /* Navigation adaptations */
+  .nav-menu {
+    gap: 1.5rem;
+  }
+  
+  .search-input {
+    width: 130px;
+  }
+  
+  .search-input:focus {
+    width: 170px;
+  }
+  
+  /* Footer adaptations */
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+  
+  .footer-col:first-child {
+    grid-column: span 2;
+  }
+  
+  /* Timeline component */
+  .timeline-container::after {
+    left: 20px;
+  }
+  
+  .timeline-item {
+    width: 100%;
+    padding-left: 50px;
+    padding-right: 0;
+  }
+  
+  .timeline-item:nth-child(odd) {
+    text-align: left;
+  }
+  
+  .timeline-item:nth-child(even) {
+    left: 0;
+  }
+  
+  .timeline-dot {
+    left: 20px;
+    transform: translate(-50%, 0);
+  }
+}
+
+/* 4. Mobile Devices (< 768px) */
+@media (max-width: 767px) {
+  :root {
+    --container-width: 100%;
+  }
+  
+  html {
+    font-size: 14px;
+  }
+  
+  section {
+    padding: 5rem 0;
+  }
+  
+  .container {
+    padding: 0 1.5rem;
+  }
+  
+  h1 {
+    font-size: 2.25rem;
+  }
+  
+  h2 {
+    font-size: 1.85rem;
+  }
+  
+  /* Navbar conversion to drawer menu */
+  .hamburger {
+    display: flex;
+  }
+  
+  .nav-menu {
+    position: fixed;
+    top: var(--navbar-height);
+    left: -100%;
+    width: 100%;
+    height: calc(100vh - var(--navbar-height));
+    background: var(--bg-color);
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 4rem 2rem;
+    gap: 2rem;
+    transition: left var(--transition-speed) cubic-bezier(0.77, 0, 0.175, 1);
+    box-shadow: 0 15px 30px var(--shadow-color);
+    overflow-y: auto;
+    z-index: 999;
+  }
+  
+  .navbar.menu-open .nav-menu {
+    left: 0;
+  }
+  
+  /* Transform Hamburger to X when open */
+  .navbar.menu-open .hamburger span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+  
+  .navbar.menu-open .hamburger span:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .navbar.menu-open .hamburger span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+  
+  .nav-actions {
+    gap: 0.75rem;
+  }
+  
+  .nav-search {
+    display: none; /* Hide standard nav search on small mobile to make room */
+  }
+  
+  /* Footer adaptations */
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  
+  .footer-col:first-child {
+    grid-column: span 1;
+  }
+  
+  .footer-bottom {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+  
+  /* Floating elements adjustments */
+  .floating-actions {
+    bottom: 1.5rem;
+    right: 1.5rem;
+    gap: 0.75rem;
+  }
+  
+  .float-btn {
+    width: 48px;
+    height: 48px;
+  }
+  
+  .back-to-top {
+    bottom: 1.5rem;
+    left: 1.5rem;
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* 5. Extremely Small Devices (< 480px) */
+@media (max-width: 479px) {
+  h1 {
+    font-size: 2rem;
+  }
+  
+  h2 {
+    font-size: 1.65rem;
+  }
+  
+  .btn {
+    padding: 0.85rem 1.5rem;
+    font-size: 0.9rem;
+    width: 100%; /* Stack buttons on very small screens */
+  }
+  
+  .nav-brand {
+    font-size: 1.25rem;
+  }
+  
+  .logo-icon {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+/* Mobile Search Display Logic */
+.mobile-search-item {
+  display: none;
+  width: 100%;
+}
+
+@media (max-width: 991px) {
+  .mobile-search-item {
+    display: block;
+  }
+  .mobile-search-item .search-dropdown {
+    width: 100%;
+    left: 0;
+    right: 0;
+  }
+  .mobile-search-item .search-item {
+    color: var(--text-primary) !important;
+  }
+}
+
+/* ==========================================================================
+   Mobile Grid & Typography Overrides
+   ========================================================================== */
+@media (max-width: 991px) {
+  .grid-hero,
+  .grid-about-bio,
+  .grid-about-cards,
+  .grid-two-col {
+    grid-template-columns: 1fr !important;
+    gap: 2.5rem !important;
+  }
+  
+  .hero-visual {
+    max-width: 450px;
+    margin: 0 auto;
+    width: 100%;
+  }
+}
+
+@media (max-width: 767px) {
+  .grid-about-cards {
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem !important;
+  }
+  
+  .hero-title {
+    font-size: 2.25rem !important;
+  }
+  
+  .philosophy-title,
+  .doctor-bio-name {
+    font-size: 1.75rem !important;
+  }
+}
+
+@media (max-width: 479px) {
+  .hero-title {
+    font-size: 1.9rem !important;
+  }
+}
